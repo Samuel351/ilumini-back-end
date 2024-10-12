@@ -11,10 +11,14 @@ namespace Infrastructure.Data.Repositories
 
         private readonly AppDbContext _appDbContext = dbContext;
 
-        public override Task<Question?> GetByIdAsync(Guid id, CancellationToken? token)
+        public override async Task<Question?> GetByIdAsync(Guid id, CancellationToken? token)
         {
-            return _appDbContext.Questions.Include(x => x.Options).FirstOrDefaultAsync(x => x.Id == id);
+            return await _appDbContext.Questions.Include(x => x.Options).FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<Question>> GetQuestionsByFormId(Guid formId)
+        {
+            return await _appDbContext.Questions.Include(x => x.Options).Where(x => x.FormId  == formId).ToListAsync();
+        }
     }
 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Repositories.Interfaces
 {
-    public interface IQuestionRepository : IRepositoryBase<Question>
+    public interface IFormRepository : IRepositoryBase<Form>
     {
-        Task<IEnumerable<Question>> GetQuestionsByFormId(Guid formId);
     }
 }

@@ -9,9 +9,11 @@ namespace Ilumini.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FormController(IFormService formService) : ControllerBase
+    public class FormController(IFormService formService, IQuestionService questionService) : ControllerBase
     {
         private readonly IFormService _formService = formService;
+
+        private readonly IQuestionService _questionService = questionService;
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -21,6 +23,16 @@ namespace Ilumini.Controllers
             if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
 
             return Ok(response.Value!.Select(x => new FormResponse(x)));
+        }
+
+        [HttpGet("{id}/questions")]
+        public async Task<IActionResult> GetAll([FromRoute] Guid id)
+        {
+            var response = await _questionService.GetQuestionsByFormId(id);
+
+            if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
+
+            return Ok(response.Value!.Select(x => new QuestionResponse(x)));
         }
 
         [HttpGet("{id}")]

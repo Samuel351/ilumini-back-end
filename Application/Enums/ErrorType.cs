@@ -11,6 +11,7 @@ namespace Application.Enums
         NOT_FOUND = 404,
         ALREADY_EXISTS = 403,
         EXCEPTION = 500,
-        CONFLICT = 409
+        CONFLICT = 409,
+        NO_CONTENT = 204
     }
 }

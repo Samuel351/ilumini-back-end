@@ -11,6 +11,8 @@ namespace Ilumini.DTOs.Response
 
         public string Description { get; set; }
 
+        public List<QuestionResponse> Questions { get; set; }
+
         public FormResponse()
         {
             Name = string.Empty;
@@ -22,6 +24,7 @@ namespace Ilumini.DTOs.Response
             Id = form.Id;
             Name = form.Name;
             Description = form.Description;
+            Questions = form.Questions.Select(x => new QuestionResponse(x)).ToList();
         }
     }
 }

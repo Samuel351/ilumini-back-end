@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Implementations
 {
-    public class FormService(IRepositoryBase<Form> repository, ILogger<IServiceBase<Form>> logger) : ServiceBase<Form>(repository, logger), IFormService
+    public class FormService(IFormRepository repository, ILogger<IServiceBase<Form>> logger) : ServiceBase<Form>(repository, logger), IFormService
     {
     }
 }

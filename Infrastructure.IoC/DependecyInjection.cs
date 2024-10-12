@@ -16,6 +16,7 @@ namespace Infrastructure.IoC
         {
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IFormRepository, FormRepository>();
 
             services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
                 Environment.GetEnvironmentVariable("DefaultConnection") ?? configuration.GetConnectionString("DefaultConnection"))

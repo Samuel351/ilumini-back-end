@@ -1,5 +1,7 @@
 ﻿using Application.Consts;
+using Application.Enums;
 using Application.Models;
+using Application.Models.Errors;
 using Application.Repositories.Interfaces;
 using Application.Services.Interfaces;
 using Domain.Entities;
@@ -10,6 +12,8 @@ namespace Application.Services.Implementations
 {
     public class QuestionService(IQuestionRepository repository, ILogger<IServiceBase<Question>> logger) : ServiceBase<Question>(repository, logger), IQuestionService
     {
+
+        private readonly IQuestionRepository _repository = repository;
 
         public override Task<Result<Question>> CreateAsync(Question entity)
         {
@@ -46,6 +50,15 @@ namespace Application.Services.Implementations
             }
 
             return base.UpdateAsync(entity);
+        }
+
+        public async Task<Result<IEnumerable<Question>>> GetQuestionsByFormId(Guid formId)
+        {
+            var result = await _repository.GetQuestionsByFormId(formId);
+
+            if (!result.Any()) return Result.ForError<IEnumerable<Question>>(new ErrorModel(string.Empty, "Sem conteúdo", ErrorType.NO_CONTENT));
+
+            return Result.Success(result);
         }
     }
 }
