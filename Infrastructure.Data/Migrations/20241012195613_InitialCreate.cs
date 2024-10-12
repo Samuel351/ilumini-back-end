@@ -36,7 +36,7 @@ namespace Infrastructure.Data.Migrations
                     Statement = table.Column<string>(type: "text", nullable: false),
                     Order = table.Column<int>(type: "integer", nullable: false),
                     IsOptional = table.Column<bool>(type: "boolean", nullable: false),
-                    QuestionType = table.Column<int>(type: "integer", nullable: false),
+                    LikertType = table.Column<int>(type: "integer", nullable: false),
                     FormId = table.Column<Guid>(type: "uuid", nullable: false),
                     Deleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -60,7 +60,7 @@ namespace Infrastructure.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Statement = table.Column<string>(type: "text", nullable: false),
-                    Value = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<int>(type: "integer", nullable: false),
                     Order = table.Column<int>(type: "integer", nullable: false),
                     QuestionId = table.Column<Guid>(type: "uuid", nullable: false),
                     Deleted = table.Column<bool>(type: "boolean", nullable: false),

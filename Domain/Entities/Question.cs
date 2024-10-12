@@ -15,7 +15,7 @@ namespace Domain.Entities
 
         public bool IsOptional { get; set; }
          
-        public QuestionType QuestionType { get; set; }
+        public LikertType LikertType { get; set; }
 
         public Guid FormId { get; set; }
 
@@ -27,5 +27,25 @@ namespace Domain.Entities
         { 
             Statement = string.Empty;
         }
+
+        public Question(Guid formId, string statement, int order,  bool isOptional, LikertType likertType)
+        {
+            FormId = formId;
+            Statement = statement;
+            Order = order;
+            IsOptional = isOptional;
+            LikertType = likertType;
+        }
+
+        public Question(string statement, Guid id, Guid formId, int order, bool isOptional, LikertType questionType)
+        {
+            Id = id;
+            FormId = formId;
+            Statement = statement;
+            Order = order;
+            IsOptional = isOptional;
+            LikertType = questionType;
+        }
+
     }
 }

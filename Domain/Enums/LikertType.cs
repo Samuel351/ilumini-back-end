@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-    public enum QuestionType
+    public enum LikertType
     {
-        LIKERT
+        AgreementScale,
+        FrequencyScale,
+        ImportanceScale,
+        CustomScale
     }
 }

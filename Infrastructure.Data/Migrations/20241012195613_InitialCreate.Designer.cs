@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241012173820_InitialCreate")]
+    [Migration("20241012195613_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -88,9 +88,8 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("boolean")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Value")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -120,10 +119,10 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("LastUpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Order")
+                    b.Property<int>("LikertType")
                         .HasColumnType("integer");
 
-                    b.Property<int>("QuestionType")
+                    b.Property<int>("Order")
                         .HasColumnType("integer");
 
                     b.Property<string>("Statement")

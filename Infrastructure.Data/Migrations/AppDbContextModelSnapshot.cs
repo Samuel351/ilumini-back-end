@@ -85,9 +85,8 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("boolean")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Value")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -117,10 +116,10 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("LastUpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Order")
+                    b.Property<int>("LikertType")
                         .HasColumnType("integer");
 
-                    b.Property<int>("QuestionType")
+                    b.Property<int>("Order")
                         .HasColumnType("integer");
 
                     b.Property<string>("Statement")

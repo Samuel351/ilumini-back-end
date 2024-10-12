@@ -10,7 +10,7 @@ namespace Domain.Entities
     {
         public string Statement { get; set; }
 
-        public string Value { get; set; }
+        public int Value { get; set; }
 
         public int Order { get; set; }
 
@@ -21,7 +21,6 @@ namespace Domain.Entities
         public Option() 
         { 
             Statement = string.Empty;
-            Value = string.Empty;
         }
 
     }
