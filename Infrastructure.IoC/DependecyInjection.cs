@@ -1,4 +1,4 @@
-﻿using Application.Repositories;
+﻿using Application.Repositories.Interfaces;
 using Application.Services.Implementations;
 using Application.Services.Interfaces;
 using Infraestructure.Data.Context;
@@ -23,6 +23,7 @@ namespace Infrastructure.IoC
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
+            services.AddScoped<IFormService, FormService>();
         }
 
         public static void AddUseCases(this IServiceCollection services)

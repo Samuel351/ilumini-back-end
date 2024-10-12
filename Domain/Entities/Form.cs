@@ -19,5 +19,11 @@ namespace Domain.Entities
             Name = string.Empty;
             Description = string.Empty;
         }
+
+        public Form(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
     }
 }

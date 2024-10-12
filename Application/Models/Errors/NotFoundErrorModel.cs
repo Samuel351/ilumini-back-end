@@ -2,6 +2,6 @@
 
 namespace Application.Models.Errors;
 
-public class NotFoundErrorModel() : ErrorModel("Usuário não encontrado", "Verifique os dados e tente novamente", errorType: ErrorType.CONFLICT)
+public class NotFoundErrorModel() : ErrorModel("Entidade não encontrada", "Verifique os dados e tente novamente", errorType: ErrorType.NOT_FOUND)
 {
 }

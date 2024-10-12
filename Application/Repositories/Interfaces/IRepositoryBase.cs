@@ -2,7 +2,7 @@
 using Application.Models;
 using Domain.Entities;
 
-namespace Application.Repositories
+namespace Application.Repositories.Interfaces
 {
     public interface IRepositoryBase<T> where T : EntityBase
     {

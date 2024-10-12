@@ -1,7 +1,7 @@
 ﻿using Application.Enums;
 using Application.Models;
 using Application.Models.Errors;
-using Application.Repositories;
+using Application.Repositories.Interfaces;
 using Application.Services.Interfaces;
 using Domain.Entities;
 using Microsoft.Extensions.Logging;
@@ -76,8 +76,13 @@ namespace Application.Services.Implementations
         {
             try
             {
-                T updated = await _repository.UpdateAsync(entity);
-                return Result.Success(updated);
+                if(await _repository.Exists(entity.Id))
+                {
+                    T updated = await _repository.UpdateAsync(entity);
+                    return Result.Success(updated);
+                }
+
+                return Result.ForError<T>(new NotFoundErrorModel());
             }
             catch (Exception ex)
             {
