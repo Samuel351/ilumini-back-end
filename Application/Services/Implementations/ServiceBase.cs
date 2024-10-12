@@ -14,7 +14,7 @@ namespace Application.Services.Implementations
         private readonly IRepositoryBase<T> _repository = repository;
         private readonly ILogger<IServiceBase<T>> _logger = logger;
 
-        public async Task<Result> ChangeStatusAsync(Guid id)
+        public virtual async Task<Result> ChangeStatusAsync(Guid id)
         {
 
             var entity = await _repository.GetByIdAsync(id, null);
@@ -28,7 +28,7 @@ namespace Application.Services.Implementations
             return Result.Success(true);
         }
 
-        public async Task<Result<T>> CreateAsync(T entity)
+        public virtual async Task<Result<T>> CreateAsync(T entity)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace Application.Services.Implementations
             }
         }
 
-        public async Task<Result> DeleteAsync(T entity)
+        public virtual async Task<Result> DeleteAsync(T entity)
         {
             try
             {
@@ -56,13 +56,13 @@ namespace Application.Services.Implementations
             }
         }
 
-        public async Task<Result<IEnumerable<T>>> GetAllAsync()
+        public virtual async Task<Result<IEnumerable<T>>> GetAllAsync()
         {
             IEnumerable<T> all = await _repository.GetAllAsync();
             return Result.Success(all);
         }
 
-        public async Task<Result<T>> GetByIdAsync(Guid id, CancellationToken? cancellationToken = null)
+        public virtual async Task<Result<T>> GetByIdAsync(Guid id, CancellationToken? cancellationToken = null)
         {
             T? found = await _repository.GetByIdAsync(id, cancellationToken);
 
@@ -72,7 +72,7 @@ namespace Application.Services.Implementations
             return Result.Success(found);
         }
 
-        public async Task<Result<T>> UpdateAsync(T entity)
+        public virtual async Task<Result<T>> UpdateAsync(T entity)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace Application.Services.Implementations
             }
         }
 
-        public async Task<Result> DeleteById(Guid id)
+        public virtual async Task<Result> DeleteById(Guid id)
         {
             var response = await _repository.DeleteById(id);
 
@@ -100,7 +100,7 @@ namespace Application.Services.Implementations
             return Result.Success(response);
         }
 
-        public async Task<Result<bool>> Exists(Guid id)
+        public virtual async Task<Result<bool>> Exists(Guid id)
         {
             var response = await _repository.Exists(id);
             return Result.Success(response);
