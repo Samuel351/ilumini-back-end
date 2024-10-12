@@ -16,7 +16,7 @@ namespace Domain.Entities
 
         public Guid QuestionId { get; set; }
 
-        public Question? Form { get; set; }
+        public Question? Question { get; set; }
 
         public Option() 
         { 
