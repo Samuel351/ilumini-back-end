@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Services.Implementations
 {
-    public class QuestionService(IRepositoryBase<Question> repository, ILogger<IServiceBase<Question>> logger) : ServiceBase<Question>(repository, logger), IQuestionService
+    public class QuestionService(IQuestionRepository repository, ILogger<IServiceBase<Question>> logger) : ServiceBase<Question>(repository, logger), IQuestionService
     {
 
         public override Task<Result<Question>> CreateAsync(Question entity)

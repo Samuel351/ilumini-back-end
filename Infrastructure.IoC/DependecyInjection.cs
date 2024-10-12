@@ -3,6 +3,7 @@ using Application.Services.Implementations;
 using Application.Services.Interfaces;
 using Infraestructure.Data.Context;
 using Infraestructure.Data.Repositories;
+using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ namespace Infrastructure.IoC
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
 
             services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
                 Environment.GetEnvironmentVariable("DefaultConnection") ?? configuration.GetConnectionString("DefaultConnection"))

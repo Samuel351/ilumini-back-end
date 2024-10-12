@@ -12,6 +12,8 @@ namespace Ilumini.DTOs.Response
 
         public LikertType QuestionType { get; set; }
 
+        public List<OptionResponse> Options { get; set; } = [];
+
         public QuestionResponse()
         {
             Statement = string.Empty;
@@ -23,6 +25,7 @@ namespace Ilumini.DTOs.Response
             Statement = question.Statement;
             QuestionType = question.LikertType;
             Order = question.Order;
+            Options = question.Options.Select(x => new OptionResponse(x)).ToList();
         }
     }
 }
