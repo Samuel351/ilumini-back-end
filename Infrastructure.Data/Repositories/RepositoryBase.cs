@@ -1,10 +1,7 @@
-﻿using Application.Enums;
-using Application.Models;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Domain.Entities;
 using Infraestructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infraestructure.Data.Repositories
 {
@@ -59,12 +56,6 @@ namespace Infraestructure.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<ITransaction> BeginTransaction()
-        {
-            IDbContextTransaction dbContextTransaction = await _appDbContext.Database.BeginTransactionAsync();
-            return new Transaction(dbContextTransaction);
-        }
-
         public async Task<bool> ChangeStatusAsync(Guid id)
         {
             var entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
@@ -90,19 +81,3 @@ namespace Infraestructure.Data.Repositories
     }
 }
 
-internal class Transaction(IDbContextTransaction transaction) : ITransaction
-{
-
-    private IDbContextTransaction _transaction = transaction;
-
-
-    public Task CommitAsync()
-    {
-        return _transaction.CommitAsync();
-    }
-
-    public Task RollbackAsync()
-    {
-        return _transaction.RollbackAsync();
-    }
-}

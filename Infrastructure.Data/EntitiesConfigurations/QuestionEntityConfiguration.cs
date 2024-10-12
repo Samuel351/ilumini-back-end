@@ -18,7 +18,9 @@ namespace Infrastructure.Data.EntitiesConfigurations
                 .WithOne(x => x.Question)
                 .HasForeignKey(x => x.QuestionId);
 
-            
+            builder.Property(x => x.Order).IsRequired();
+
+            builder.Property(x => x.Statement).IsRequired();
 
             base.Configure(builder);
         }
