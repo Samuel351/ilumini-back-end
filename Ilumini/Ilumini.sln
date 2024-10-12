@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ilumini", "Ilumini.csproj", "{6B2A42DF-453C-4575-B167-41E45C1C02A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B2A42DF-453C-4575-B167-41E45C1C02A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2A42DF-453C-4575-B167-41E45C1C02A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2A42DF-453C-4575-B167-41E45C1C02A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2A42DF-453C-4575-B167-41E45C1C02A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41F79B0C-1404-46FB-AB7D-9E7A8CCDB673}
+	EndGlobalSection
+EndGlobal
