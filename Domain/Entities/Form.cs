@@ -14,6 +14,8 @@ namespace Domain.Entities
 
         public List<Question> Questions { get; set; } = [];
 
+        public List<FormInstance> Instances { get; set; } = [];
+
         public Form() 
         { 
             Name = string.Empty;

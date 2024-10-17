@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Infraestructure.Data.EntitiesConfigurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data.EntitiesConfigurations
 {
@@ -15,6 +10,10 @@ namespace Infrastructure.Data.EntitiesConfigurations
         public override void Configure(EntityTypeBuilder<Form> builder)
         {
             builder.HasMany(x => x.Questions)
+                .WithOne(x => x.Form)
+                .HasForeignKey(x => x.FormId);
+
+            builder.HasMany(x => x.Instances)
                 .WithOne(x => x.Form)
                 .HasForeignKey(x => x.FormId);
 

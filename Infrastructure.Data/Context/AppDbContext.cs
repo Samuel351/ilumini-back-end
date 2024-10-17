@@ -13,10 +13,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     public DbSet<Option> Options { get; set; }
 
+    public DbSet<FormInstance> FormInstances { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new FormEntityConfiguration());
         modelBuilder.ApplyConfiguration(new QuestionEntityConfiguration());
         modelBuilder.ApplyConfiguration(new OptionEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new FormInstanceEntityConfiguration());
     }
 }
