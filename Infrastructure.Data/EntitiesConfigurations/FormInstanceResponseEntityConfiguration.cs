@@ -21,6 +21,10 @@ namespace Infrastructure.Data.EntitiesConfigurations
                 .WithMany(x => x.Responses)
                 .HasForeignKey(x => x.OptionId);
 
+            builder.HasOne(x => x.Recipient)
+                .WithMany(x => x.Responses)
+                .HasForeignKey(x => x.RecipientId);
+
             builder.Property(x => x.OptionId).IsRequired();
 
             base.Configure(builder);

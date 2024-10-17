@@ -13,6 +13,10 @@ namespace Infrastructure.Data.EntitiesConfigurations
                 .WithMany(x => x.Options)
                 .HasForeignKey(x => x.QuestionId);
 
+            builder.HasMany(x => x.Responses)
+                .WithOne(x => x.Option)
+                .HasForeignKey(x => x.OptionId);
+
             base.Configure(builder);
         }
     }

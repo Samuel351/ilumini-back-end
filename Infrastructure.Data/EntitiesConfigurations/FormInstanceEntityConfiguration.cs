@@ -22,6 +22,9 @@ namespace Infrastructure.Data.EntitiesConfigurations
                 .WithOne(x => x.FormInstance)
                 .HasForeignKey(x => x.FormInstanceId);
 
+            builder.HasMany(x => x.Recipients)
+                .WithMany(x => x.FormInstances);
+
             builder.Property(x => x.LaunchName).IsRequired();
 
             base.Configure(builder);

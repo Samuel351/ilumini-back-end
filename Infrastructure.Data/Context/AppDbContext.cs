@@ -15,11 +15,17 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     public DbSet<FormInstance> FormInstances { get; set; }
 
+    public DbSet<FormInstanceResponse> FormInstancesResponse { get; set; }
+
+    public DbSet<Recipient> Recipients { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new FormEntityConfiguration());
         modelBuilder.ApplyConfiguration(new QuestionEntityConfiguration());
         modelBuilder.ApplyConfiguration(new OptionEntityConfiguration());
         modelBuilder.ApplyConfiguration(new FormInstanceEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new FormInstanceResponseEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new RecipientEntityConfiguration());    
     }
 }

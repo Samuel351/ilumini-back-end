@@ -17,5 +17,7 @@ namespace Domain.Entities
         public DateTime ExpirationDate { get; set; }
 
         public List<FormInstanceResponse> Responses { get; set; } = [];
+
+        public List<Recipient> Recipients { get; set; } = [];
     }
 }

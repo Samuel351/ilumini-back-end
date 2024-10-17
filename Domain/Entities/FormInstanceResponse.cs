@@ -15,5 +15,9 @@ namespace Domain.Entities
         public Guid FormInstanceId { get; set; }
 
         public FormInstance? FormInstance { get; set; }
+
+        public Guid RecipientId { get; set; }
+
+        public Recipient? Recipient { get; set; }
     }
 }
