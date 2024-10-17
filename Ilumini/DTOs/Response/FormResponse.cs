@@ -13,6 +13,8 @@ namespace Ilumini.DTOs.Response
 
         public List<QuestionResponse> Questions { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         public FormResponse()
         {
             Name = string.Empty;
@@ -25,6 +27,7 @@ namespace Ilumini.DTOs.Response
             Name = form.Name;
             Description = form.Description;
             Questions = form.Questions.Select(x => new QuestionResponse(x)).ToList();
+            CreatedAt = form.CreatedAt;
         }
     }
 }

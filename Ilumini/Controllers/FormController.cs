@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Ilumini.DTOs.Request;
 using Ilumini.DTOs.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Ilumini.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class FormController(IFormService formService, IQuestionService questionService) : ControllerBase
     {
         private readonly IFormService _formService = formService;
@@ -16,6 +18,7 @@ namespace Ilumini.Controllers
         private readonly IQuestionService _questionService = questionService;
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var response = await _formService.GetAllAsync();
@@ -72,6 +75,12 @@ namespace Ilumini.Controllers
 
             if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
 
+            return Ok();
+        }
+
+        [HttpPost("{id}/launch-form")]
+        public async Task<IActionResult> LauchForm([FromRoute] Guid id, [FromBody] LaunchFormRequest request)
+        {
             return Ok();
         }
     }

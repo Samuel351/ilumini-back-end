@@ -7,6 +7,8 @@ using Application.Services.Interfaces;
 using Domain.Entities;
 using Domain.Enums;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Application.Services.Implementations
 {
@@ -15,39 +17,42 @@ namespace Application.Services.Implementations
 
         private readonly IQuestionRepository _repository = repository;
 
+        private readonly ILogger<IServiceBase<Question>> _logger = logger;
+
         public override Task<Result<Question>> CreateAsync(Question entity)
         {
-            switch(entity.LikertType)
-            {
-                case LikertType.AgreementScale:
-                    entity.Options = [.. LikertScale.AgreementScale];
-                    break;
-                case LikertType.ImportanceScale:
-                    entity.Options = [.. LikertScale.ImportanceScale];
-                    break;
-                case LikertType.FrequencyScale:
-                    entity.Options = [.. LikertScale.FrequencyScale];
-                    break;
-            }
+            entity.Options = LikertScale.GetScalePreSet(entity.LikertType);
 
             return base.CreateAsync(entity);
         }
 
+        public async Task<Result> CreateBatch(List<Question> questions)
+        {
+            questions.ForEach(async x =>
+            {
+                x.Options = LikertScale.GetScalePreSet(x.LikertType);
+
+                _ = await base.CreateAsync(x);
+            });
+
+            return Result.Empty();
+        }
+        
+        public Task<Result> UpdateBatch(List<Question> questions)
+        {
+            questions.ForEach(async x =>
+            {
+                x.Options = LikertScale.GetScalePreSet(x.LikertType);
+
+                _ = await base.UpdateAsync(x);
+            });
+
+            return Task.FromResult(Result.Empty());
+        }
+
         public override Task<Result<Question>> UpdateAsync(Question entity)
         {
-
-            switch (entity.LikertType)
-            {
-                case LikertType.AgreementScale:
-                    entity.Options = [.. LikertScale.AgreementScale];
-                    break;
-                case LikertType.ImportanceScale:
-                    entity.Options = [.. LikertScale.ImportanceScale];
-                    break;
-                case LikertType.FrequencyScale:
-                    entity.Options = [.. LikertScale.FrequencyScale];
-                    break;
-            }
+            entity.Options = LikertScale.GetScalePreSet(entity.LikertType);
 
             return base.UpdateAsync(entity);
         }

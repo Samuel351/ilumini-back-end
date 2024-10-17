@@ -13,5 +13,9 @@ namespace Application.Services.Interfaces
 
         Task<Result<IEnumerable<Question>>> GetQuestionsByFormId(Guid formId);
 
+        Task<Result> CreateBatch(List<Question> questions);
+
+        Task<Result> UpdateBatch(List<Question> questions);
+
     }
 }

@@ -47,5 +47,11 @@ namespace Domain.Entities
             LikertType = questionType;
         }
 
+        public void SetOptions(List<Option> options)
+        {
+            options.ForEach(x => x.Question = this);
+            Options = options;
+        }
+
     }
 }

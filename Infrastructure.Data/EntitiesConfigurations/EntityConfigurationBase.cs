@@ -10,6 +10,7 @@ internal class EntityConfigurationBase<T> : IEntityTypeConfiguration<T> where T 
     {
         builder.ToTable($"{typeof(T).Name.ToLower()}");
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
         builder.HasQueryFilter(x => !x.Deleted);
         builder.Property(x => x.CreatedAt);
         builder.Property(x => x.LastUpdatedAt);

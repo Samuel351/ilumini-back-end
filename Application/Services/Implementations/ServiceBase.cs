@@ -33,6 +33,7 @@ namespace Application.Services.Implementations
             try
             {
                 await _repository.CreateAsync(entity);
+                _logger.LogInformation("SAVED");
                 return Result.Success(entity);
             }
             catch (Exception ex)

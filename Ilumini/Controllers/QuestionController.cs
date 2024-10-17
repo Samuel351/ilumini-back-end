@@ -34,23 +34,25 @@ namespace Ilumini.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateQuestionRequest request)
+        public async Task<IActionResult> Create([FromBody] List<CreateQuestionRequest> request)
         {
-            var response = await _questionService.CreateAsync(new Question(request.FormId, request.Statement, request.Order, request.IsOpcional, request.LikertType));
+            var list = request.Select(x => new Question(x.FormId, x.Statement, x.Order, x.IsOpcional, x.LikertType)).ToList();
+            var response = await _questionService.CreateBatch(list);
 
             if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
 
-            return Ok(new QuestionResponse(response.Value!));
+            return Ok();
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateQuestionRequest request)
+        public async Task<IActionResult> Update([FromBody] List<UpdateQuestionRequest> request)
         {
-            var response = await _questionService.CreateAsync(new Question(request.Statement, request.Id, request.FormId, request.Order, request.IsOpcional, request.LikertType));
+            var list = request.Select(x => new Question(x.FormId, x.Statement, x.Order, x.IsOpcional, x.LikertType)).ToList();
+            var response = await _questionService.UpdateBatch(list);
 
             if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
 
-            return Ok(new QuestionResponse(response.Value!));
+            return Ok();
         }
 
         [HttpDelete("{id}")]

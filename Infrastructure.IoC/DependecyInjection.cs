@@ -33,5 +33,20 @@ namespace Infrastructure.IoC
         public static void AddUseCases(this IServiceCollection services)
         { 
         }
+
+        public static void ConfigPolicy(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
+                });
+            });
+
+            
+        }
     }
 }
