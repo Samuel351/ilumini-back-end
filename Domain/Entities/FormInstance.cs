@@ -19,5 +19,14 @@ namespace Domain.Entities
         public List<FormInstanceResponse> Responses { get; set; } = [];
 
         public List<Recipient> Recipients { get; set; } = [];
+        
+        public FormInstance() { }
+
+        public FormInstance(Guid formId, string launchName, DateTime expirationDate)
+        {
+            FormId = formId;
+            LaunchName = launchName;
+            ExpirationDate = expirationDate;
+        }
     }
 }

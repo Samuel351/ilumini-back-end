@@ -1,4 +1,5 @@
 ﻿using Application.Services.Interfaces;
+using Azure;
 using Domain.Entities;
 using Ilumini.DTOs.Request;
 using Ilumini.DTOs.Response;
@@ -11,11 +12,13 @@ namespace Ilumini.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
-    public class FormController(IFormService formService, IQuestionService questionService) : ControllerBase
+    public class FormController(IFormService formService, IQuestionService questionService, IFormInstanceService formInstanceService) : ControllerBase
     {
         private readonly IFormService _formService = formService;
 
         private readonly IQuestionService _questionService = questionService;
+
+        private readonly IFormInstanceService _formInstanceService = formInstanceService;
 
         [HttpGet]
         [AllowAnonymous]
@@ -81,6 +84,9 @@ namespace Ilumini.Controllers
         [HttpPost("{id}/launch-form")]
         public async Task<IActionResult> LauchForm([FromRoute] Guid id, [FromBody] LaunchFormRequest request)
         {
+            var response = await _formInstanceService.CreateAsync(new FormInstance(id, request.LaunchName, request.ExpirationDate));
+            if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
+
             return Ok();
         }
     }

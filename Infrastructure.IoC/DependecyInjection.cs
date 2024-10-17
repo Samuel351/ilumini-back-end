@@ -18,7 +18,7 @@ namespace Infrastructure.IoC
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IFormRepository, FormRepository>();
 
-            services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
                 Environment.GetEnvironmentVariable("DefaultConnection") ?? configuration.GetConnectionString("DefaultConnection"))
             );
         }
@@ -28,6 +28,7 @@ namespace Infrastructure.IoC
             services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
             services.AddScoped<IFormService, FormService>();
             services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IFormInstanceService, FormInstanceService>();
         }
 
         public static void AddUseCases(this IServiceCollection services)

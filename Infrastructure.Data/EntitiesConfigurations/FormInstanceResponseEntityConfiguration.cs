@@ -19,7 +19,8 @@ namespace Infrastructure.Data.EntitiesConfigurations
 
             builder.HasOne(x => x.Option)
                 .WithMany(x => x.Responses)
-                .HasForeignKey(x => x.OptionId);
+                .HasForeignKey(x => x.OptionId)
+                .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction); 
 
             builder.HasOne(x => x.Recipient)
                 .WithMany(x => x.Responses)

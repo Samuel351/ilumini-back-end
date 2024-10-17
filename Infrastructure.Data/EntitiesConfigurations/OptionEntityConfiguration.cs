@@ -15,7 +15,8 @@ namespace Infrastructure.Data.EntitiesConfigurations
 
             builder.HasMany(x => x.Responses)
                 .WithOne(x => x.Option)
-                .HasForeignKey(x => x.OptionId);
+                .HasForeignKey(x => x.OptionId)
+                .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction);
 
             base.Configure(builder);
         }

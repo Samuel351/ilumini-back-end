@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Infraestructure.Data.EntitiesConfigurations;
 using Infrastructure.Data.EntitiesConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,8 +18,16 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     public DbSet<Recipient> Recipients { get; set; }
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        
+
         modelBuilder.ApplyConfiguration(new FormEntityConfiguration());
         modelBuilder.ApplyConfiguration(new QuestionEntityConfiguration());
         modelBuilder.ApplyConfiguration(new OptionEntityConfiguration());
