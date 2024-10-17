@@ -18,6 +18,8 @@ namespace Domain.Entities
 
         public Question? Question { get; set; }
 
+        public List<FormInstanceResponse> Responses { get; set; } = [];
+
         public Option() 
         { 
             Statement = string.Empty;

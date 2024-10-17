@@ -15,5 +15,7 @@ namespace Domain.Entities
         public string LaunchName { get; set; }
 
         public DateTime ExpirationDate { get; set; }
+
+        public List<FormInstanceResponse> Responses { get; set; } = [];
     }
 }
