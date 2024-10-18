@@ -19,5 +19,14 @@ namespace Domain.Entities
         public Guid RecipientId { get; set; }
 
         public Recipient? Recipient { get; set; }
+
+        public FormInstanceResponse() { }
+
+        public FormInstanceResponse(Guid formInstanceId, Guid optionId, Guid recipientId)
+        {
+            FormInstanceId = formInstanceId;
+            OptionId = optionId;
+            RecipientId = recipientId;
+        }
     }
 }

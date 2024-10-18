@@ -29,6 +29,7 @@ namespace Infrastructure.IoC
             services.AddScoped<IFormService, FormService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IFormInstanceService, FormInstanceService>();
+            services.AddScoped<IFormInstanceResponseService, FormInstanceResponseService>();
         }
 
         public static void AddUseCases(this IServiceCollection services)
