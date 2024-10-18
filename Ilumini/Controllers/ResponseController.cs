@@ -14,7 +14,7 @@ namespace Ilumini.Controllers
         private readonly IFormInstanceResponseService _formInstanceResponseService = formInstanceResponseService;
 
         [HttpPost]
-        public async Task<IActionResult> SubmitResponse([FromRoute] SubmitResponseRequest request)
+        public async Task<IActionResult> SubmitResponse([FromBody] SubmitResponseRequest request)
         {
             var response = await _formInstanceResponseService.CreateAsync(new FormInstanceResponse(request.FormInstanceId, request.OptionId, request.RecipientId));
             if (response.HasError()) return StatusCode((int)response.Error!.ErrorType, response.Error);
