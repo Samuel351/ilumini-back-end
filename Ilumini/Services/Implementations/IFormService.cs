@@ -13,5 +13,7 @@ namespace Ilumini.Services.Implementations
         Result<FormInstanceResponse> LauchForm(Guid formId);
 
         Result<FormResponse> GetFormByInstance(Guid instanceId);
+
+        Result SetResponse(List<FormAnswerRequest> response);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Ilumini.Presentation.DTOs.Request;
+using Ilumini.Presentation.DTOs.Response;
 using Ilumini.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +45,14 @@ namespace Ilumini.Presentation.Controllers
             var result = _formService.GetFormByInstance(instanceId);
             if (result.HasResponseModel()) return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
             return Ok(result.Value!);
+        }
+
+        [HttpPost]
+        [Route("save-answers")]
+        public IActionResult SaveAnwers(List<FormAnswerRequest> requests)
+        {
+            var result = _formService.SetResponse(requests);
+            return Ok(result);
         }
     }
 }

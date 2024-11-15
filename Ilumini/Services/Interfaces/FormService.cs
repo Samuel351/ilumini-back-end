@@ -55,5 +55,17 @@ namespace Ilumini.Services.Interfaces
 
             return new Result<FormInstanceResponse>(new FormInstanceResponse(formInstance.Id.ToString()));
         }
+
+        public Result SetResponse(List<FormAnswerRequest> responses)
+        {
+            var formInstance = _appDbContext.FormInstances.FirstOrDefault(x => x.Id == responses[0].FormInstanceId);
+
+            if (formInstance == null) return new Result<FormResponse>(new ResponseModel("Formulário não encontrado!", HttpStatusCode.OK));
+
+            _appDbContext.Responses.AddRange(responses.Select(x => x.ToEntity()));
+            _appDbContext.SaveChanges();
+
+            return new Result<FormResponse>(new ResponseModel("Formulário respondido", HttpStatusCode.OK));
+        }
     }
 }
