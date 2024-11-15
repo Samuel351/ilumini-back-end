@@ -10,5 +10,12 @@
 
         public List<Response> Responses { get; set; } = [];
 
+        public FormInstance() { }
+
+        public FormInstance(Guid formId)
+        {
+            FormId = formId;
+        }
+
     }
 }

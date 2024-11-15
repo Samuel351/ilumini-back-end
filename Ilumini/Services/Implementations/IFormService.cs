@@ -9,5 +9,9 @@ namespace Ilumini.Services.Implementations
         Result CreateForm(CreateFormRequest request);
 
         Result<FormResponse> GetFormById(Guid formId);
+
+        Result<FormInstanceResponse> LauchForm(Guid formId);
+
+        Result<FormResponse> GetFormByInstance(Guid instanceId);
     }
 }

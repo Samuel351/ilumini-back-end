@@ -1,4 +1,5 @@
 ﻿using Ilumini.Data;
+using Ilumini.Domain.Entities;
 using Ilumini.Presentation.DTOs.Request;
 using Ilumini.Presentation.DTOs.Response;
 using Ilumini.Services.Implementations;
@@ -30,6 +31,29 @@ namespace Ilumini.Services.Interfaces
             if (form == null) return new Result<FormResponse>(new ResponseModel("Formulário não encontrado!", HttpStatusCode.OK));
 
             return new Result<FormResponse>(new FormResponse(form));
+        }
+
+        public Result<FormResponse> GetFormByInstance(Guid instanceId)
+        {
+            var formInstance = _appDbContext.FormInstances.FirstOrDefault(x => x.Id == instanceId);
+
+            if (formInstance == null) return new Result<FormResponse>(new ResponseModel("Formulário não encontrado!", HttpStatusCode.OK));
+
+            return GetFormById(formInstance.FormId);    
+        }
+
+        public Result<FormInstanceResponse> LauchForm(Guid formId)
+        {
+            var form = _appDbContext.Forms.FirstOrDefault(x => x.Id == formId);
+
+            if (form == null) return new Result<FormInstanceResponse>(new ResponseModel("Formulário não encontrado!", HttpStatusCode.OK));
+
+            var formInstance = new FormInstance(formId);
+
+            _appDbContext.FormInstances.Add(formInstance);
+            _appDbContext.SaveChanges();
+
+            return new Result<FormInstanceResponse>(new FormInstanceResponse(formInstance.Id.ToString()));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Ilumini.Presentation.DTOs.Request;
 using Ilumini.Services.Implementations;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ilumini.Presentation.Controllers
@@ -11,8 +10,6 @@ namespace Ilumini.Presentation.Controllers
     {
 
         private readonly IFormService _formService = formService;
-
-        // Get all
 
         // Get By Id
         [HttpGet("{id}")]
@@ -31,5 +28,22 @@ namespace Ilumini.Presentation.Controllers
             return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
         }
 
+        [HttpPost]
+        [Route("{formId}/lauch-form")]
+        public IActionResult LauchForm([FromRoute] Guid formId)
+        {
+            var result = _formService.LauchForm(formId);
+            if (result.HasResponseModel()) return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
+            return Ok(result.Value!);
+        }
+
+        [HttpGet]
+        [Route("form-instance/{instanceId}")]
+        public IActionResult GetFormInstanceId([FromRoute] Guid instanceId)
+        {
+            var result = _formService.GetFormByInstance(instanceId);
+            if (result.HasResponseModel()) return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
+            return Ok(result.Value!);
+        }
     }
 }
