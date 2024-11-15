@@ -29,7 +29,7 @@ namespace Ilumini.Presentation.Controllers
         }
 
         [HttpPost]
-        [Route("{formId}/lauch-form")]
+        [Route("{formId}/launch-form")]
         public IActionResult LauchForm([FromRoute] Guid formId)
         {
             var result = _formService.LauchForm(formId);
