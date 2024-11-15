@@ -1,6 +1,4 @@
-﻿using Ilumini.Domain.Entities;
-
-namespace Ilumini.Presentation.DTOs.Request
+﻿namespace Ilumini.Presentation.DTOs.Request
 {
     public class CreateFormRequest
     {
