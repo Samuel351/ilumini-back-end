@@ -1,4 +1,6 @@
-﻿namespace Ilumini.Presentation.DTOs.Request
+﻿using Ilumini.Domain.Entities;
+
+namespace Ilumini.Presentation.DTOs.Request
 {
     public class CreateQuestionRequest
     {
@@ -8,5 +10,11 @@
         public bool IsOpcional { get; set; }
 
         public List<CreateOptionRequest> Options { get; set; } = [];
+
+
+        public Question ToEntity()
+        {
+            return new Question(Statement, Position, IsOpcional, Options.Select(x => x.ToEntity()).ToList(), FormId);
+        }
     }
 }

@@ -14,5 +14,19 @@
 
         public List<Option> Options { get; set; } = [];
 
+        public Question() { }
+
+        public Question(string statement, int position, bool isOpcional, List<Option> options, Guid? formId)
+        {
+            Statement = statement;
+            Position = position;
+            IsOpcional = isOpcional;
+            if(formId.HasValue)
+            {
+                FormId = formId.Value;
+            }
+            Options = options;
+        }
+
     }
 }

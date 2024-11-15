@@ -1,4 +1,5 @@
 ﻿using Ilumini.Presentation.DTOs.Request;
+using Ilumini.Services.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,8 +7,10 @@ namespace Ilumini.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FormController : ControllerBase
+    public class FormController(IFormService formService) : ControllerBase
     {
+
+        private readonly IFormService _formService = formService;
 
         // Get all
 
@@ -15,14 +18,17 @@ namespace Ilumini.Presentation.Controllers
         [HttpGet("{id}")]
         public IActionResult GetFormById([FromRoute] Guid id)
         {
-            return Ok(id);
+            var result = _formService.GetFormById(id);
+            if (result.HasResponseModel()) return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
+            return Ok(result.Value!);
         }
 
         // Create
         [HttpPost]
         public IActionResult CreateForm(CreateFormRequest request)
         {
-            return Ok(request);
+            var result = _formService.CreateForm(request);
+            return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
         }
 
     }
