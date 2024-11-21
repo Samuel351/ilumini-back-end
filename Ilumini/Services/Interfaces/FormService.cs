@@ -24,6 +24,11 @@ namespace Ilumini.Services.Interfaces
             return new Result(new ResponseModel("Formulário criado!", HttpStatusCode.OK));
         }
 
+        public Result<List<FormResponse>> GetAll()
+        {
+            return new Result<List<FormResponse>>(_appDbContext.Forms.ToList().Select(x => new FormResponse(x)).ToList());
+        }
+
         public Result<FormResponse> GetFormById(Guid formId)
         {
             var form = _appDbContext.Forms.Include(x => x.Questions).ThenInclude(x => x.Options).FirstOrDefault(x => x.Id == formId);

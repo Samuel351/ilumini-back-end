@@ -21,6 +21,16 @@ internal class Program
 
         builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DefaultConnection") ?? builder.Configuration.GetConnectionString("DefaultConnection")));
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: "all",
+                policy => policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            );
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -33,6 +43,7 @@ internal class Program
         //app.UseHttpsRedirection();
 
         //app.UseAuthorization();
+        app.UseCors("all");
 
         app.MapControllers();
 

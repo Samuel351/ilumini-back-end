@@ -21,6 +21,16 @@ namespace Ilumini.Presentation.Controllers
             return Ok(result.Value!);
         }
 
+        [HttpGet]
+        public IActionResult GetAllForms()
+        {
+            var result = _formService.GetAll();
+
+            if (result.HasResponseModel()) return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
+
+            return Ok(result.Value);
+        }
+
         // Create
         [HttpPost]
         public IActionResult CreateForm(CreateFormRequest request)
@@ -54,5 +64,15 @@ namespace Ilumini.Presentation.Controllers
             var result = _formService.SetResponse(requests);
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteById([FromRoute] Guid id)
+        {
+            var result = _formService.GetFormById(id);
+            if (result.HasResponseModel()) return StatusCode(result.ResponseModel!.StatusCode, result.ResponseModel);
+            return Ok(result.Value!);
+        }
+
+
     }
 }
